@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZONE404 | プロフィールリンク</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c1c3a;
+    --pink:#0c93cd;
+    --btn-bg: rgba(255,255,255,0.55);
+    --btn-bg-hover: rgba(255,255,255,0.75);
+    --btn-border: rgba(255,255,255,0.8);
+    --max-w: 480px;
+    --pc-outer-bg: #4bbce5;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    font-family:"Noto Sans JP", sans-serif;
+    color: var(--ink);
+    background: #1c1c1c;
+    display:flex;
+    justify-content:center;
+    padding: 24px 12px;
+  }
+
+  .page{
+    width:100%;
+    max-width: var(--max-w);
+    border-radius: 18px;
+    overflow:hidden;
+    position:relative;
+    background-image: url("assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  .page::before{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.25));
+    pointer-events:none;
+  }
+
+  .inner{
+    position:relative;
+    padding: 28px 22px 40px;
+    display:flex;
+    flex-direction:column;
+    gap: 22px;
+  }
+
+  .tags{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size: 0.85rem;
+    font-weight:700;
+  }
+
+  .brand{
+    text-align:center;
+    padding: 6px 0 4px;
+  }
+  .brand-sub{
+    font-family:"Oswald", sans-serif;
+    letter-spacing: 0.08em;
+    font-size: 1.05rem;
+    margin: 0 0 6px;
+  }
+  .brand img.logo{
+    max-width: 92%;
+    height:auto;
+    display:block;
+    margin: 0 auto;
+  }
+
+  .title-icon{
+    flex: 0 0 auto;
+    height: 1em;   
+    width: auto;
+    display:block;
+  }
+
+  .concept{
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .concept h2{
+    display:flex;
+    align-items:center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    font-family:"Oswald", sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .menu{
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-size: 0.92rem;
+  }
+  .menu h2{
+    display:flex;
+    align-items:center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    font-family:"Oswald", sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    margin: 0 0 10px;
+  }
+  .title-text{
+    white-space: nowrap;
+  }
+  .menu ul{ margin:0; padding:0; list-style:none; }
+  .menu li{
+    display:flex;
+    justify-content:space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(12,28,58,0.25);
+  }
+  .menu li:last-child{ border-bottom:none; }
+
+  .links{
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+  }
+  .link-btn{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 14px;
+    padding: 10px 16px;
+    text-decoration:none;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 1.05rem;
+    font-style: italic;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .link-btn:hover{ background: var(--btn-bg-hover); }
+  .link-btn:active{ transform: scale(0.98); }
+
+  .icon-badge{
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: var(--pink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .icon-badge svg{
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+  }
+
+  .no-download{
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none; /* iOSの長押しメニュー対策 */
+    -webkit-user-drag: none;
+    pointer-events: none;       /* クリック・ドラッグ操作自体を無効化 */
+  }
+
+  .access{
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-size: 0.92rem;
+  }
+  .access h2{
+    font-family:"Oswald", sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    margin: 0 0 10px;
+  }
+  .access ul{ margin:0; padding:0; list-style:none; }
+  .access li{
+    display:flex;
+    justify-content:space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(12,28,58,0.25);
+  }
+  .access li:last-child{ border-bottom:none; }
+
+  footer{
+    text-align:center;
+    font-size: 0.7rem;
+    color: rgba(12,28,58,0.7);
+    padding-top: 4px;
+  }
+
+  @media (max-width:360px){
+    .link-btn{ font-size:0.95rem; padding:9px 12px; }
+    .icon-badge{ width:40px; height:40px; }
+  }
+
+  @media (min-width: 768px){
+    body{
+      background-color: var(--pc-outer-bg);
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="inner">
+
+    <div class="tags">
+      <span>#桑沢祭2026</span>
+      <span>自治会</span>
+    </div>
+
+    <div class="brand">
+      <p class="brand-sub">THE LIMINAL CAFE</p>
+      <img class="logo no-download" src="assets/logo.png" alt="ZONE404 ロゴ" draggable="false">
+    </div>
+
+    <section class="concept">
+      <h2>
+        <img class="title-icon" src="assets/key.svg" alt="">
+        <span class="title-text">CONCEPT</span>
+      </h2>
+      <p>
+        ここは、現実と夢のあいだにある境界の空間「リミナルスペース」。その一つとして、桑沢との境界に突如として現れた“ZONE404”。此処は現実？空想？夢のなか？
+        <br>奇妙で不思議な空間があなたを陥れる。<br>“ZONE404”はいつでもあなたを歓迎いたします。
+      </p>
+    </section>
+
+    <section class="menu">
+      <h2>
+        <img class="title-icon" src="assets/key.svg" alt="">
+        <span class="title-text">MENU</span>
+      </h2>
+      <ul>
+        <li><span>鍵のクッキー</span><span>¥300</span></li>
+        <li><span>ゾーンブレンドコーヒー</span><span>¥400</span></li>
+        <li><span>404 ソーダフロート</span><span>¥450</span></li>
+        <li><span>リミナルティー</span><span>¥350</span></li>
+      </ul>
+    </section>
+
+    <div class="links">
+
+      <a class="link-btn" href="https://x.com/kds_jichikai" target="_blank" rel="noopener">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.5-7.2L4.4 22H1.3l8.1-9.3L1 2h7.3l5 6.6L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z"/></svg>
+        </span>
+        @kds_jichikai
+      </a>
+
+      <a class="link-btn" href="https://www.instagram.com/kds_jichikai/" target="_blank" rel="noopener">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47C15.06 21.99 14.7 22 12 22s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77a4.9 4.9 0 0 1 1.77-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.4 6.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
+        </span>
+        @kds_jichikai
+      </a>
+
+      <a class="link-btn" href="https://x.com/kuwasawasai2026" target="_blank" rel="noopener">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.5-7.2L4.4 22H1.3l8.1-9.3L1 2h7.3l5 6.6L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z"/></svg>
+        </span>
+        @kuwasawasai2026
+      </a>
+
+      <a class="link-btn" href="https://www.instagram.com/kuwasawasai_2026/" target="_blank" rel="noopener">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47C15.06 21.99 14.7 22 12 22s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77a4.9 4.9 0 0 1 1.77-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.4 6.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
+        </span>
+        @kuwasawasai_2026
+      </a>
+
+      <a class="link-btn" href="https://www.kds.ac.jp/others/kuwasawasai2026/" target="_blank" rel="noopener">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.94 9h-3.03a15.6 15.6 0 0 0-1.14-5.4A8.03 8.03 0 0 1 19.94 11ZM12 4.06c.9 1.2 1.9 3.2 2.13 6.94H9.87C10.1 7.26 11.1 5.26 12 4.06ZM4.06 13h3.03c.1 2.02.47 3.87 1.14 5.4A8.03 8.03 0 0 1 4.06 13Zm3.03-2H4.06a8.03 8.03 0 0 1 4.17-5.4A15.6 15.6 0 0 0 7.09 11ZM12 19.94c-.9-1.2-1.9-3.2-2.13-6.94h4.26c-.23 3.74-1.23 5.74-2.13 6.94ZM14.9 18.4c.67-1.53 1.04-3.38 1.14-5.4h3.03a8.03 8.03 0 0 1-4.17 5.4Z"/></svg>
+        </span>
+        桑沢デザイン研究所 公式サイト
+      </a>
+
+    </div>
+
+    <section class="access">
+      <h2>LOCATION</h2>
+      <ul>
+        <li><span>専門学校桑沢デザイン研究所</span><span>1号館6階アトリエ</span></li>
+        <li><span>運営団体</span><span>自治会・桑沢祭実行委員会</span></li>
+        <li><span>お支払い方法</span><span>現金のみ</span></li>
+      </ul>
+    </section>
+
+    <footer>THE LIMINAL CAFE ZONE404 — #桑沢祭2026 自治会</footer>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var bg = document.querySelector('.page');
+    if (bg) {
+      bg.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      bg.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    }
+  });
+</script>
+
+</body>
+</html>
