@@ -1,339 +1,227 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZONE404 | プロフィールリンク</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>リミナルカフェ ZONE404</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#0c1c3a;
-    --pink:#0c93cd;
-    --btn-bg: rgba(255,255,255,0.55);
-    --btn-bg-hover: rgba(255,255,255,0.75);
-    --btn-border: rgba(255,255,255,0.8);
-    --max-w: 480px;
-    --pc-outer-bg: #4bbce5;
-  }
-  *{ box-sizing: border-box; }
-  html,body{ margin:0; padding:0; }
-  body{
-    min-height:100vh;
-    font-family:"Noto Sans JP", sans-serif;
-    color: var(--ink);
-    background: #1c1c1c;
-    display:flex;
-    justify-content:center;
-    padding: 24px 12px;
-  }
+html,body{margin:0;background:#2a7fc0;font-family:"Zen Maru Gothic",sans-serif}
+/* 100lvh：スマホのアドレスバー開閉で高さが変わらないようにする */
+#stage{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;overflow:hidden}
+#world{position:absolute;left:0;top:0;width:1000px;height:1400px;transform-origin:0 0;will-change:transform;
+  background:#4aa8e0 url(images/bg.jpg) center/100% 100% no-repeat;font-weight:700}
+.e{position:absolute;margin:0;display:block}
+img.e{height:auto}
 
-  .page{
-    width:100%;
-    max-width: var(--max-w);
-    border-radius: 18px;
-    overflow:hidden;
-    position:relative;
-    background-image: url("assets/background.jpg");
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-  }
-  .page::before{
-    content:"";
-    position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.25));
-    pointer-events:none;
-  }
+/* ===== 文字組：すべて Zen Maru Gothic。ブロックの幅いっぱいに均等割付 ===== */
+.txt{letter-spacing:.04em;line-height:1.85;text-align:justify;text-justify:inter-character;
+  line-break:strict;word-break:auto-phrase;text-wrap:pretty}
+.txt p{margin:0 0 .5em}
+.txt p:last-child{margin-bottom:0}
+.concept-text{color:#5a2a1a}
+.menu-text,.refuse-text{color:#1d4d1d}
+.sub{color:#102040;font-weight:500;letter-spacing:.06em}
+.org,.copy{color:#102040;letter-spacing:.04em}
+.logo{padding:10px;box-sizing:content-box}
+.ball{width:var(--d);height:var(--d);border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff 0,var(--c) 35%,#0004 100%)}
 
-  .inner{
-    position:relative;
-    padding: 28px 22px 40px;
-    display:flex;
-    flex-direction:column;
-    gap: 22px;
-  }
+.menu-text ul{ margin:0; padding:0; list-style:none; max-width: 60%;}
+.menu-text li{
+display:flex;
+justify-content:space-between;
+padding: 6px 0;
+border-bottom: 1px dashed rgba(12,28,58,0.25);
+}
+.menu-text li:last-child{ border-bottom:none; }
 
-  .tags{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size: 0.85rem;
-    font-weight:700;
-  }
+/* ===== PC（横長）のレイアウト：座標は 1000×1400 のキャンバス上の px ===== */
+.org{left:18px;top:20px;font-size:10px}
+.logo{left:10px;top:60px;width:300px}
+.sub{left:15px;top:35px;font-size:15px}
+.concept-title{left:355px;top:150px;width:250px}
+.concept-text{left:370px;top:250px;width:500px;font-size:15px}
+.menu-title{left:34px;top:540px;width:200px}
+.menu-text{left:34px;top:628px;width:320px;font-size:15px}
+.food-cupcake{left:350px;top:528px;width:200px}
+.food-pizza{left:500px;top:540px;width:200px}
+.food-banana{left:345px;top:688px;width:200px}
+.food-fries{left:505px;top:715px;width:200px}
+.refuse-title{left:365px;top:925px;width:200px}
+.refuse-text{left:365px;top:1012px;width:350px;font-size:15px;color:#102040}
+.copy{left:365px;top:1226px;font-size:9px}
+.duck1{left:249px;top:1100px;width:131px}
+.duck2{left:822px;top:1067px;width:116px}
+.b1{left:766px;top:57px;--d:75px;--c:#7bb4e6}
+.b2{left:905px;top:330px;--d:45px;--c:#a070b0}
+.b3{left:915px;top:632px;--d:50px;--c:#2f7fc8}
+.b4{left:143px;top:1103px;--d:70px;--c:#e8c020}
+.b5{left:613px;top:1198px;--d:40px;--c:#3aa040}
+.b6{left:409px;top:1272px;--d:43px;--c:#8a2a8a}
 
-  .brand{
-    text-align:center;
-    padding: 6px 0 4px;
-  }
-  .brand-sub{
-    font-family:"Oswald", sans-serif;
-    letter-spacing: 0.08em;
-    font-size: 1.05rem;
-    margin: 0 0 6px;
-  }
-  .brand img.logo{
-    max-width: 92%;
-    height:auto;
-    display:block;
-    margin: 0 auto;
-  }
+/* ===== スマホ（縦長）のレイアウト：枠は幅320の縦長 ===== */
+@media (max-aspect-ratio:1/1){
+ .org,.copy{display:none}
+ .sub{left:16px;top:28px;font-size:18px}
+ .logo{left:0;top:62px;width:300px}
+ .concept-title{left:16px;top:215px;width:200px}
+ .concept-text{left:16px;top:295px;width:288px;font-size:14px}
+ .food-pizza{left:0px;top:535px;width:230px;}
+ .food-cupcake{left:145px;top:500px;width:230px}
+ .menu-title{left:20px;top:725px;width:210px}
+ .menu-text{left:16px;top:820px;width:288px;font-size:14px}
+ .food-banana{left:315px;top:800px;width:250px}
+ .food-fries{left:420px;top:930px;width:250px}
+ .refuse-title{left:676px;top:820px;width:240px}
+ .refuse-text{left:676px;top:925px;width:288px;font-size:13.5px}
+ .b2{left:626px;top:177px}
+}
 
-  .title-icon{
-    flex: 0 0 auto;
-    height: 1em;   
-    width: auto;
-    display:block;
-  }
-
-  .concept{
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    border-radius: 16px;
-    padding: 16px 18px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    font-size: 0.92rem;
-    line-height: 1.7;
-  }
-  .concept h2{
-    display:flex;
-    align-items:center;
-    flex-wrap: nowrap;
-    gap: 8px;
-    font-family:"Oswald", sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    margin: 0 0 8px;
-  }
-
-  .menu{
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    border-radius: 16px;
-    padding: 16px 18px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    font-size: 0.92rem;
-  }
-  .menu h2{
-    display:flex;
-    align-items:center;
-    flex-wrap: nowrap;
-    gap: 8px;
-    font-family:"Oswald", sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    margin: 0 0 10px;
-  }
-  .title-text{
-    white-space: nowrap;
-  }
-  .menu ul{ margin:0; padding:0; list-style:none; }
-  .menu li{
-    display:flex;
-    justify-content:space-between;
-    padding: 6px 0;
-    border-bottom: 1px dashed rgba(12,28,58,0.25);
-  }
-  .menu li:last-child{ border-bottom:none; }
-
-  .links{
-    display:flex;
-    flex-direction:column;
-    gap: 12px;
-  }
-  .link-btn{
-    display:flex;
-    align-items:center;
-    gap: 14px;
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    border-radius: 14px;
-    padding: 10px 16px;
-    text-decoration:none;
-    color: var(--ink);
-    font-weight: 700;
-    font-size: 1.05rem;
-    font-style: italic;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    transition: background 0.15s ease, transform 0.1s ease;
-  }
-  .link-btn:hover{ background: var(--btn-bg-hover); }
-  .link-btn:active{ transform: scale(0.98); }
-
-  .icon-badge{
-    flex: 0 0 auto;
-    width: 46px;
-    height: 46px;
-    border-radius: 10px;
-    background: var(--pink);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .icon-badge svg{
-    width: 26px;
-    height: 26px;
-    fill: #fff;
-  }
-
-  .no-download{
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none; /* iOSの長押しメニュー対策 */
-    -webkit-user-drag: none;
-    pointer-events: none;       /* クリック・ドラッグ操作自体を無効化 */
-  }
-
-  .access{
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    border-radius: 16px;
-    padding: 16px 18px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    font-size: 0.92rem;
-  }
-  .access h2{
-    font-family:"Oswald", sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    margin: 0 0 10px;
-  }
-  .access ul{ margin:0; padding:0; list-style:none; }
-  .access li{
-    display:flex;
-    justify-content:space-between;
-    padding: 6px 0;
-    border-bottom: 1px dashed rgba(12,28,58,0.25);
-  }
-  .access li:last-child{ border-bottom:none; }
-
-  footer{
-    text-align:center;
-    font-size: 0.7rem;
-    color: rgba(12,28,58,0.7);
-    padding-top: 4px;
-  }
-
-  @media (max-width:360px){
-    .link-btn{ font-size:0.95rem; padding:9px 12px; }
-    .icon-badge{ width:40px; height:40px; }
-  }
-
-  @media (min-width: 768px){
-    body{
-      background-color: var(--pc-outer-bg);
-    }
-  }
-
+/* ===== SNSボタン（画面固定） ===== */
+.sns{position:fixed;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  display:flex;gap:10px;justify-content:center;z-index:10;pointer-events:none}
+.sns a{pointer-events:auto;font:700 13px/1 "Zen Maru Gothic",sans-serif;color:#102040;text-decoration:none;
+  background:#fffc;border:2px solid #102040;border-radius:999px;padding:10px 16px;
+  backdrop-filter:blur(4px);transition:transform .15s,background .15s}
+.sns a:hover{transform:translateY(-2px);background:#fff}
+.dbg{position:absolute;border:3px solid #ff0;box-sizing:border-box;color:#ff0;font:700 28px sans-serif;
+  background:#ff02;pointer-events:none}
 </style>
 </head>
 <body>
 
-<div class="page">
-  <div class="inner">
+<div id="stage">
+ <div id="world">
+  <!-- ▼ 画像は images/ フォルダに置いてファイル名を合わせるか、src を書き換えてください -->
+  <p class="e org">運営団体：自治会・桑沢祭実行委員会</p>
+  <img class="e logo" src="images/logo.png" alt="ZONE404">
+  <p class="e sub">リミナルカフェ　ゾーン404</p>
 
-    <div class="tags">
-      <span>#桑沢祭2026</span>
-      <span>自治会</span>
-    </div>
-
-    <div class="brand">
-      <p class="brand-sub">THE LIMINAL CAFE</p>
-      <img class="logo no-download" src="assets/logo.png" alt="ZONE404 ロゴ" draggable="false">
-    </div>
-
-    <section class="concept">
-      <h2>
-        <img class="title-icon" src="assets/key.svg" alt="">
-        <span class="title-text">CONCEPT</span>
-      </h2>
-      <p>
-        ここは、現実と夢のあいだにある境界の空間「リミナルスペース」。その一つとして、桑沢との境界に突如として現れた“ZONE404”。此処は現実？空想？夢のなか？
-        <br>奇妙で不思議な空間があなたを陥れる。<br>“ZONE404”はいつでもあなたを歓迎いたします。
-      </p>
-    </section>
-
-    <section class="menu">
-      <h2>
-        <img class="title-icon" src="assets/key.svg" alt="">
-        <span class="title-text">MENU</span>
-      </h2>
-      <p>近日公開予定</p>
-      <!-- <ul>
-        <li><span>鍵のクッキー</span><span>¥300</span></li>
-        <li><span>ゾーンブレンドコーヒー</span><span>¥400</span></li>
-        <li><span>404 ソーダフロート</span><span>¥450</span></li>
-        <li><span>リミナルティー</span><span>¥350</span></li>
-      </ul> -->
-    </section>
-
-    <div class="links">
-
-      <a class="link-btn" href="https://x.com/kds_jichikai" target="_blank" rel="noopener">
-        <span class="icon-badge">
-          <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.5-7.2L4.4 22H1.3l8.1-9.3L1 2h7.3l5 6.6L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z"/></svg>
-        </span>
-        @kds_jichikai
-      </a>
-
-      <a class="link-btn" href="https://www.instagram.com/kds_jichikai/" target="_blank" rel="noopener">
-        <span class="icon-badge">
-          <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47C15.06 21.99 14.7 22 12 22s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77a4.9 4.9 0 0 1 1.77-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.4 6.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
-        </span>
-        @kds_jichikai
-      </a>
-
-      <a class="link-btn" href="https://x.com/kuwasawasai2026" target="_blank" rel="noopener">
-        <span class="icon-badge">
-          <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.5-7.2L4.4 22H1.3l8.1-9.3L1 2h7.3l5 6.6L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z"/></svg>
-        </span>
-        @kuwasawasai2026
-      </a>
-
-      <a class="link-btn" href="https://www.instagram.com/kuwasawasai_2026/" target="_blank" rel="noopener">
-        <span class="icon-badge">
-          <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47C15.06 21.99 14.7 22 12 22s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77a4.9 4.9 0 0 1 1.77-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.4 6.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
-        </span>
-        @kuwasawasai_2026
-      </a>
-
-      <a class="link-btn" href="https://www.kds.ac.jp/others/kuwasawasai2026/" target="_blank" rel="noopener">
-        <span class="icon-badge">
-          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.94 9h-3.03a15.6 15.6 0 0 0-1.14-5.4A8.03 8.03 0 0 1 19.94 11ZM12 4.06c.9 1.2 1.9 3.2 2.13 6.94H9.87C10.1 7.26 11.1 5.26 12 4.06ZM4.06 13h3.03c.1 2.02.47 3.87 1.14 5.4A8.03 8.03 0 0 1 4.06 13Zm3.03-2H4.06a8.03 8.03 0 0 1 4.17-5.4A15.6 15.6 0 0 0 7.09 11ZM12 19.94c-.9-1.2-1.9-3.2-2.13-6.94h4.26c-.23 3.74-1.23 5.74-2.13 6.94ZM14.9 18.4c.67-1.53 1.04-3.38 1.14-5.4h3.03a8.03 8.03 0 0 1-4.17 5.4Z"/></svg>
-        </span>
-        桑沢デザイン研究所 公式サイト
-      </a>
-
-    </div>
-
-    <section class="access">
-      <h2>LOCATION</h2>
-      <ul>
-        <li><span>桑沢デザイン研究所</span><span>1号館6階</span></li>
-        <li><span>運営団体</span><span>自治会・桑沢祭実行委員会</span></li>
-        <li><span>お支払い方法</span><span>現金のみ</span></li>
-      </ul>
-    </section>
-
-    <footer>THE LIMINAL CAFE ZONE404 — #桑沢祭2026 自治会</footer>
-
+  <img class="e concept-title" src="images/title-concept.png" alt="コンセプト">
+  <!-- ▼ テキストはここで編集（1つの <p> が1段落） -->
+  <div class="e txt concept-text">
+    <p>ここは、現実と夢のあいだにある境界の空間「リミナルスペース」その一つとして、桑沢との境界に突如として現れた“ZONE404”。</p>
+    <p>此処は現実？空想？夢のなか？</p>
+    <p>奇妙で不思議な空間があなたを陥れる。</p>
+    <p>“ZONE404”はいつでもあなた様のご来店を歓迎いたします。</p>
   </div>
+
+  <img class="e menu-title" src="images/title-menu.png" alt="メニュー">
+  <div class="e txt menu-text">
+      <ul>
+        <li><span>ピザトースト</span><span>¥400</span></li>
+        <li><span>フライ</span><span>¥300</span></li>
+        <li><span>カップケーキ</span><span>¥400</span></li>
+        <li><span>チョコバナナ</span><span>¥400</span></li>
+      </ul>
+  </div>
+  <img class="e food-cupcake" src="images/food-cupcake.png" alt="カップケーキ">
+  <img class="e food-pizza"   src="images/food-pizza.png"   alt="ピザトースト">
+  <img class="e food-banana"  src="images/food-banana.png"  alt="バナナスイーツ">
+  <img class="e food-fries"   src="images/food-fries.png"   alt="フライドポテト">
+
+  <img class="e refuse-title" src="images/title-refuse.png" alt="お断り">
+  <div class="e txt refuse-text">
+    <p>＊お支払いは「現金のみ」です。</p>
+    <p>＊商品画像は開発時のコンセプトイメージです。実際の製品とはデザイン・仕様が異なる場合があります。予めご了承ください。</p>
+  </div>
+  <p class="e copy">(c) 2026 桑沢デザイン研究所自治会　@kde_jichikai</p>
+
+  <img class="e duck1" src="images/duck-pixel.png" alt="">
+  <img class="e duck2" src="images/duck.png" alt="">
+  <!-- 玉はCSSで描画。背景画像に含まれている場合は下の2行を削除してください -->
+  <i class="e ball b1"></i><i class="e ball b2"></i><i class="e ball b3"></i>
+  <i class="e ball b4"></i><i class="e ball b5"></i><i class="e ball b6"></i>
+ </div>
 </div>
 
+<!-- ▼ SNSリンク：href を書き換え、不要なものは行ごと削除してください -->
+<nav class="sns" aria-label="SNS">
+  <a href="https://x.com/kds_jichikai" target="_blank" rel="noopener">X</a>
+  <a href="https://www.instagram.com/kds_jichikai" target="_blank" rel="noopener">Instagram</a>
+  <a href="https://www.kds.ac.jp/others/kuwasawasai2026/" target="_blank" rel="noopener">学校公式サイト</a>
+</nav>
+
+<div id="spacer"></div>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var bg = document.querySelector('.page');
-    if (bg) {
-      bg.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-      bg.addEventListener('dragstart', function (e) { e.preventDefault(); });
+/* ===== 設定：カメラが通る枠 [x, y, 幅, 高さ]（キャンバス 1000×1400 の座標）=====
+   上から順番に、スクロールに合わせて枠1→枠2→…と移動します。
+   位置合わせは URL の末尾に ?debug を付けると枠が表示されて確認できます。 */
+const W = 1000, H = 1400;
+const FRAMES = {
+  pc: [[0,2,667,375],[300,126,667,375],[0,521,667,375],[323,873,667,375]],
+  sp: [[0,0,320,692],[0,590,320,692],[660,708,320,692]]
+};
+const HOLD   = 0.5;  // 各枠で止まって読ませるスクロール量（画面の高さ×HOLD）
+const SPEED  = 0.8;  // 移動中の「指の動き : 画面の動き」の比率（小さいほどゆっくり動く）
+const SMOOTH = 0.14; // 追従のなめらかさ（小さいほどゆっくり）
+
+const world = document.getElementById('world'),
+      stage = document.getElementById('stage'),
+      spacer = document.getElementById('spacer'),
+      mq = matchMedia('(max-aspect-ratio: 1/1)'),
+      clamp = (v,a=0,b=1) => Math.min(b, Math.max(a, v)),
+      smooth = t => t*t*(3-2*t);
+let cams = [], segs = [], total = 0, VW = 0, VH = 0, cur = null, last = 0;
+
+function build(){
+  const vw = stage.clientWidth, vh = stage.clientHeight;
+  if (vw === VW && vh === VH && cams.length && cams._mq === mq.matches) return; // 高さの微小変化では作り直さない
+  VW = vw; VH = vh;
+  const fr = mq.matches ? FRAMES.sp : FRAMES.pc;
+  /* 各枠のカメラ位置。背景の外に出ないよう、枠ごとに先に制限しておく
+     （こうすると補間の途中で急に止まる／動き出すことがなくなる） */
+  cams = fr.map(([x,y,w,h]) => {
+    const s = Math.max(Math.min(vw/w, vh/h), vw/W, vh/H), hw = vw/(2*s), hh = vh/(2*s);
+    return {cx:clamp(x+w/2, hw, W-hw), cy:clamp(y+h/2, hh, H-hh), s};
+  });
+  cams._mq = mq.matches;
+  /* スクロール区間：止まる区間と動く区間を交互に並べる。
+     動く区間の長さは「画面上で動く距離」に比例させ、指と画面の動きを揃える */
+  segs = []; total = 0;
+  cams.forEach((a,i) => {
+    segs.push({a:total, b:total+vh*HOLD, i, j:i}); total += vh*HOLD;
+    if (i < cams.length-1) {
+      const b = cams[i+1], s = (a.s+b.s)/2,
+            m = Math.max(vh*0.35, Math.hypot((b.cx-a.cx)*s, (b.cy-a.cy)*s)/SPEED);
+      segs.push({a:total, b:total+m, i, j:i+1}); total += m;
     }
   });
+  spacer.style.height = (total + vh) + 'px';
+  world.querySelectorAll('.dbg').forEach(e => e.remove());
+  if (location.search.includes('debug'))
+    fr.forEach(([x,y,w,h],i) => {
+      const d = document.createElement('div'); d.className = 'dbg'; d.textContent = i+1;
+      d.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
+      world.appendChild(d);
+    });
+  cur = null;
+}
+function target(){
+  const y = clamp(scrollY, 0, total);
+  const g = segs.find(g => y < g.b) || segs[segs.length-1], a = cams[g.i], b = cams[g.j];
+  if (g.i === g.j) return {...a};
+  const u = clamp((y-g.a)/(g.b-g.a)), k = 0.7*u + 0.3*smooth(u); // ほぼ等速＋端だけ軽くイーズ
+  return {cx:a.cx+(b.cx-a.cx)*k, cy:a.cy+(b.cy-a.cy)*k, s:a.s+(b.s-a.s)*k};
+}
+function frame(now){
+  const dt = Math.min(0.05, (now-last)/1000 || 0.016); last = now;
+  const tg = target(), f = 1 - Math.pow(1-SMOOTH, dt*60);
+  if (!cur) cur = {...tg};
+  for (const k in cur) cur[k] += (tg[k]-cur[k]) * f;
+  /* 最後の安全策：背景画像の外側が映らないよう制限 */
+  const s = Math.max(cur.s, VW/W, VH/H), hw = VW/(2*s), hh = VH/(2*s),
+        cx = clamp(cur.cx, hw, W-hw), cy = clamp(cur.cy, hh, H-hh);
+  world.style.transform = `translate(${VW/2-cx*s}px,${VH/2-cy*s}px) scale(${s})`;
+  requestAnimationFrame(frame);
+}
+addEventListener('resize', build);
+mq.addEventListener('change', build);
+build(); requestAnimationFrame(frame);
 </script>
-
 </body>
 </html>
